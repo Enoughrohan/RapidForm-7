@@ -50,7 +50,7 @@ export default function ApplyModal() {
         .from('applications')
         .insert({
           ref_id: ref,
-          user_id: user?.id,
+          user_id: user?.id || null,
           service_id: selectedService?.id,
           service_name: selectedService?.name,
           service_cat: selectedService?.cat,
