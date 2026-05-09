@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import AppHeader from '@/components/layout/AppHeader';
 import BottomNav from '@/components/layout/BottomNav';
 import HomePage from '@/components/HomePage';
@@ -12,10 +12,7 @@ import ServiceModal from '@/components/modals/ServiceModal';
 import ApplyModal from '@/components/modals/ApplyModal';
 import { useAppStore } from '@/store/app';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+
 
 export default function App() {
   const { activePage } = useAppStore();
