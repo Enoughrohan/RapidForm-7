@@ -8,6 +8,11 @@ export type SchemeTab = 'central' | 'bihar';
 export type CatTab = 0 | 1 | 2 | 3 | 4;
 export type Lang = 'en' | 'hi';
 
+function getSavedLang(): Lang {
+  if (typeof window === 'undefined') return 'en';
+  return (localStorage.getItem('rf_lang') as Lang) || 'en';
+}
+
 interface AppState {
   activePage: TabPage;
   setActivePage: (p: TabPage) => void;
@@ -48,6 +53,9 @@ export const useAppStore = create<AppState>((set) => ({
   closeApply: () => set({ applyModalOpen: false }),
   successRef: null,
   setSuccessRef: (ref) => set({ successRef: ref }),
-  lang: 'en',
-  setLang: (l) => set({ lang: l }),
+  lang: getSavedLang(),
+  setLang: (l) => {
+    if (typeof window !== 'undefined') localStorage.setItem('rf_lang', l);
+    set({ lang: l });
+  },
 }));
